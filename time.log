@@ -1,0 +1,47 @@
+ESTIMATE of time to complete assignment: 20 hours
+
+            Time        Time
+Date        Started     Spent       Work completed
+-------     -------     -------     -------
+10/16       8:10pm      2:15        At office hour with Roland
+                                    Read assignment
+                                    Start programming
+                                    Finish reading from input and extracting
+                                      tokens
+                                    Have trouble extracting the last token
+                                      properly; realize that this was because
+                                      the buffer returned by getline does not
+                                      end with a null terminator
+
+10/17       2:20pm      1:45        Finish implementing stack.c
+                                    Still not understand why we have both top
+                                      and count but it seems convenient to have
+                                      top because we don't have to subtract 1
+                                      from count every time
+                                    Make the Makefile
+
+10/22       8:30pm      1:30        Start adding tokens to stack
+                                    Have trouble directing tokens to appropriate
+                                      stacks; finally understand the order by
+                                      running Calcx several times; also realize
+                                      that stack should always be checked for
+                                      length before the top of stack is examined
+
+10/25       10:15pm     2:00        Implement the evaluateStack to calculate the
+                                      value of RPN
+                                    Work with memory leak, still not done
+
+10/26       8:30am      1:00        My program is still leaking and I'm so sad
+                                    At least I learned that when I have a
+                                      a pointer to an array of character,
+                                      and want to copy a string to that pointer,
+                                      I should use strcpy instead of letting the
+                                      pointer point to the starting address of
+                                      the string, because then I will double
+                                      free everything.
+                                    Not sure why getline creates a memory leak.
+
+                        -------
+                        8:30        TOTAL time spent
+
+I discussed my solution with: Roland
