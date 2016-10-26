@@ -25,7 +25,7 @@ void StackPush(stackT *stackP, Token element)
 {
   if (StackIsFull(stackP))
   {
-    fprintf(stderr, "Stack is full");
+    fprintf(stderr, "Fatal error: Stack is full.\n");
     return;
   }
   stackP->contents[stackP->count] = element;
@@ -35,6 +35,11 @@ void StackPush(stackT *stackP, Token element)
 
 Token StackPop(stackT *stackP)
 {
+  if (StackIsEmpty(stackP))
+  {
+    fprintf(stderr, "Fatal error: Stack is empty.\n");
+    return NULL;
+  }
   stackP->count--;
   stackP->top--;
   return stackP->contents[stackP->count];

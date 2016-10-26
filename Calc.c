@@ -12,35 +12,44 @@ int main (int argc, char** argv)
     fprintf(stderr, "Usage: Calc [-debug]\n");
     return -1;
   }
+
+  // debug flag
   bool debug = false;
   if (argc == 2)
     debug = true;
+
   char *buffer = NULL;
   unsigned long len;
 
+  // keep reading each line of input
   while (getline(&buffer, &len, stdin) != -1)
   {
     printf("Input: %s", buffer);
     buffer[strlen(buffer) - 1] = '\0';
 
+    // extract tokens
     char* token;
     const char space[2] = " ";
     token = strtok(buffer, space);
 
+    // create an operator stack
     stackT* operatorStack = malloc(sizeof(stackT));
     assert(operatorStack);
-    StackInit(operatorStack, 512);
+    StackInit(operatorStack, 512); // maximum number of operators is 512
     if (debug)
       printf("Stack: size: %d :\n", operatorStack->count);
 
+    // create an output stack
     stackT* outputStack = malloc(sizeof(stackT));
     assert(outputStack);
-    StackInit(outputStack, 1024);
+    StackInit(outputStack, 1024); // maximum number of input characters is 1024
 
+    // ensure parentheses come in pairs
     int parenCount = 0;
 
     while (token != NULL)
     {
+      // create and initiate a new token with appropriate values
       double tokenValue = strtod(token, NULL);
       Token element = malloc(sizeof(struct token));
       assert(element);
@@ -64,15 +73,18 @@ int main (int argc, char** argv)
         fprintf(stderr, "Fatal Error. Bad token: %s\n", token);
         return -1;
       }
+
       element->value = tokenValue;
       strcpy(element->str, token);
       if (debug)
         printf("Token:%s: type: %d value: %.2lf\n",
           element->str, element->type, element->value);
 
+      // numbers
       if (element->type == NUM)
         StackPush(outputStack, element);
-      else //operators
+       //operators
+      else
       {
         if (element->type == OP1)
         {
